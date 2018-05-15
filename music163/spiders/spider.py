@@ -11,13 +11,23 @@ class MusicSpider(Spider):
     allowed_domains = ["163.com"]
     base_url = 'https://music.163.com'
     ids = ['1001','1002','1003','2001','2002','2003','6001','6002','6003','7001','7002','7003','4001','4002','4003']
+    cats = [u'民谣']
     initials = [i for i in range(65, 91)]+[0]
+    offsets = [i*35 for i in range(0,37)]
 
-    def start_requests(self):
+    def start_requests_old(self):
         for id in self.ids:
             for initial in self.initials:
                 url = '{url}/discover/artist/cat?id={id}&initial={initial}'.format(url=self.base_url,id=id,initial=initial)
                 yield Request(url, callback=self.parse_index)
+    
+    def start_requests(self):
+        for cat in self.cats:
+            for offset in self.offsets:
+                url = '{url}/discover/playlist/?order=hot&cat={cat}&limit=35&offset={offset}}'.format(url=self.base_url,cat=cat,offset=offset)
+                yield Request(url, callback=self.parse_index)
+
+ 
 
     # 获得所有歌手的url
     def parse_index(self, response):        
