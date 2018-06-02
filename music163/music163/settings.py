@@ -14,6 +14,7 @@ BOT_NAME = 'music163'
 SPIDER_MODULES = ['music163.spiders']
 NEWSPIDER_MODULE = 'music163.spiders'
 
+JOBDIR='pause'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'music163 (+http://www.yourdomain.com)'
@@ -99,5 +100,5 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-MONGO_URI = 'localhost'
+MONGO_URI = '198.181.56.105'
 MONGO_DB = 'music163'
