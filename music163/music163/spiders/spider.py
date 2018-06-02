@@ -59,7 +59,7 @@ class MusicSpider(Spider):
 
     # 获得音乐信息
     def parse_music(self, response):
-        print response
+        
         music_id = response.meta['id']
         music = response.xpath('//div[@class="tit"]/em[@class="f-ff2"]/text()').extract_first()
         artistName = response.xpath('//div[@class="cnt"]/p[1]/span/a/text()').extract_first()
