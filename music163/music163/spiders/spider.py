@@ -16,7 +16,8 @@ class MusicSpider(Spider):
     allowed_domains = ["163.com"]
     base_url = 'https://music.163.com'
     # ids = ['1001','1002','1003','2001','2002','2003','6001','6002','6003','7001','7002','7003','4001','4002','4003']
-    cats = [u'民谣', u'流行', u'摇滚', u'民谣', u'电子', u'舞曲', u'说唱', u'轻音乐', u'爵士', u'乡村', u'R&B/Soul', u'古典', u'民族', u'英伦', u'金属', u'朋克', u'蓝调', u'雷鬼', u'世界音乐', u'拉丁', u'另类/独立', u'New Age', u'古风', u'后摇', u'Bossa Nova']
+    #cats = [u'民谣', u'流行', u'摇滚', u'民谣', u'电子', u'舞曲', u'说唱', u'轻音乐', u'爵士', u'乡村', u'R&B/Soul', u'古典', u'民族', u'英伦', u'金属', u'朋克', u'蓝调', u'雷鬼', u'世界音乐', u'拉丁', u'另类/独立', u'New Age', u'古风', u'后摇', u'Bossa Nova']
+    cats = [u'民谣']
     # initials = [i for i in range(65, 91)]+[0]
     # offsets = [i*35 for i in range(0,37)]
     
