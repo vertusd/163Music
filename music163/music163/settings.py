@@ -9,6 +9,12 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
+#import sys
+#sys.path.append('/home/scraper/163Music/music/music163/')
+
+#sys.path.append('/home/scraper/163Music/music/')
+
+#sys.path.append('/home/scraper/163Music/')
 BOT_NAME = 'music163'
 
 SPIDER_MODULES = ['music163.spiders']

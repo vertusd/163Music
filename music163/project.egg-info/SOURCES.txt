@@ -1,0 +1,13 @@
+setup.py
+music163/__init__.py
+music163/items.py
+music163/middlewares.py
+music163/pipelines.py
+music163/settings.py
+music163/spiders/__init__.py
+music163/spiders/spider.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
