@@ -12,7 +12,10 @@ class MusicItem(scrapy.Item):
     # define the fields for your item here like:
     table_name = 'music'
     id = scrapy.Field()
-    artist = scrapy.Field()
-    album = scrapy.Field()
     music = scrapy.Field()
+    artistInfo = scrapy.Field()
+    albumInfo = scrapy.Field()
+    category = scrapy.Field()
     comments = scrapy.Field()
+    commentNum = scrapy.Field()
+    lyrics = scrapy.Field()
