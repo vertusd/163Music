@@ -99,8 +99,8 @@ class Proxies(object):
             protocol = 'https' if 'https' in proxy else 'http'
             proxies = {protocol: proxy}
             try:
-                    response =requests.get('http://music.163.com/#/discover/artist', proxies=proxies, timeout=2) 
-                    if response.status_code== 200 and response.content.index("GWebpSupport")> -1:
+                    response =requests.get('http://www.baidu.com/js/bdsug.js?v=1.0.3.0', proxies=proxies, timeout=2) 
+                    if response.status_code== 200 and response.content.index("function")> -1:
                         print('success %s' % proxy)
                         new_queue.put(proxy)
             except:
