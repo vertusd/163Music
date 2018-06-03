@@ -66,8 +66,8 @@ class MusicSpider(Spider):
         artistId = response.xpath('//div[@class="cnt"]/p[1]/span/*')[0].re('href\=\"\/artist\?id\=(\d*?)\"')[0]
         albumName = response.xpath('//div[@class="cnt"]/p[2]/a/text()').extract_first()
         albumId = response.xpath('//div[@class="cnt"]/p[2]/*')[0].re('href\=\"\/album\?id\=(\d*?)\"')[0]
-        artistInfo = {"artistId": artistId, "artistName": artistName}
-        albumInfo = {"albumName": albumName, "albumID": albumId}
+        artistInfo = {"artistId": (int)artistId, "artistName": artistName}
+        albumInfo = {"albumName": albumName, "albumID": (int)albumId}
         data = {
             'csrf_token': '',
             'params': 'Ak2s0LoP1GRJYqE3XxJUZVYK9uPEXSTttmAS+8uVLnYRoUt/Xgqdrt/13nr6OYhi75QSTlQ9FcZaWElIwE+oz9qXAu87t2DHj6Auu+2yBJDr+arG+irBbjIvKJGfjgBac+kSm2ePwf4rfuHSKVgQu1cYMdqFVnB+ojBsWopHcexbvLylDIMPulPljAWK6MR8',
@@ -75,7 +75,7 @@ class MusicSpider(Spider):
         }
         DEFAULT_REQUEST_HEADERS['Referer'] = self.base_url + '/playlist?id=' + str(music_id)
         music_comment = 'http://music.163.com/weapi/v1/resource/comments/R_SO_4_' + str(music_id)
-        yield FormRequest(music_comment, meta={'id':music_id,'music':music,'artistInfo':artistInfo,'albumInfo':albumInfo, 'cat': response.meta['cat']}, \
+        yield FormRequest(music_comment, meta={'id':(int)music_id,'music':music,'artistInfo':artistInfo,'albumInfo':albumInfo, 'cat': response.meta['cat']}, \
                           callback=self.parse_comment, formdata=data)
 
     # 获得音乐的精彩评论
@@ -88,6 +88,7 @@ class MusicSpider(Spider):
         albumInfo = response.meta['albumInfo']
         lyrics = self.getLyricsById(id)
         commentNum = result.get('total')
+        published = False
         comments = []
         if 'hotComments' in result.keys():
             for comment in result.get('hotComments'):

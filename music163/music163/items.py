@@ -19,3 +19,4 @@ class MusicItem(scrapy.Item):
     comments = scrapy.Field()
     commentNum = scrapy.Field()
     lyrics = scrapy.Field()
+    published = scrapy.Field()
