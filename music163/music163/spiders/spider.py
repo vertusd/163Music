@@ -115,7 +115,7 @@ class MusicSpider(Spider):
 
     #获取歌词
     def getLyricsById(self,songId):
-        url="http://music.163.com/api/song/media?id="+songId
+        url="http://music.163.com/api/song/media?id="+ str(songId)
         headers = {
             'User-Agent':'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
             'Referer': 'http://music.163.com'
