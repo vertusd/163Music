@@ -14,6 +14,7 @@ class Proxies(object):
     """docstring for Proxies"""
 
     def __init__(self, page=3):
+        print "__init proxies"
         self.proxies = []
         self.verify_pro = []
         self.page_count = page
@@ -31,7 +32,7 @@ class Proxies(object):
             headers = {"User-Agent": user_agent, 'Referer': referer}
             request = urllib2.Request(url, headers=headers)
             html = urllib2.urlopen(request)
-            print url
+            print "fetch" + url
             #print html
             soup = BeautifulSoup(html, 'lxml')
             ip_list = soup.find(id='ip_list')

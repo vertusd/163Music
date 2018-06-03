@@ -101,6 +101,7 @@ http_proxies = []
 
 
 def get_new_proxies():
+    print "get_new proxies"
     a = Proxies()
     a.verify_proxies()
     print(a.proxies)
@@ -152,6 +153,6 @@ class ProxyMiddleware(object):
             request.meta['change_proxy'] = True
             request.dont_filter = True
             import time
-            time.sleep(10)
+            time.sleep()
             return request
 
