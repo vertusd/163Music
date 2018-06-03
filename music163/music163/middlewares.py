@@ -98,10 +98,10 @@ class RotateUserAgentMiddleware(object):
 
 
 http_proxies = []
-
+a = Proxies()
 def get_new_proxies():
     print "get_new proxies"
-    a = Proxies()
+    a.init_proxy()
     a.verify_proxies()
     print(a.proxies)
     http_proxies = a.proxies

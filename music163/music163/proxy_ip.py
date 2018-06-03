@@ -14,13 +14,16 @@ class Proxies(object):
     """docstring for Proxies"""
 
     def __init__(self, page=3):
+        pass
+
+
+        #self.get_proxies()
+        #self.get_proxies_nn()
+    def init_proxy(self):
         print "__init proxies"
         self.proxies = []
         self.verify_pro = []
         self.page_count = page
-
-        #self.get_proxies()
-        #self.get_proxies_nn()
         self.get_proxies_mrhinkydink()
 
     def  get_proxies_xundaili(self):
