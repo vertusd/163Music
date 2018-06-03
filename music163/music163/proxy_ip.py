@@ -19,13 +19,87 @@ class Proxies(object):
         self.verify_pro = []
         self.page_count = page
 
-        self.get_proxies()
-        self.get_proxies_nn()
+        #self.get_proxies()
+        #self.get_proxies_nn()
+        self.get_proxies_mrhinkydink()
 
+    def  get_proxies_xundaili(self):
+        print "get_proxies"
+        page = 1
+        page_stop = page + self.page_count
+        print "page_stop" + str(page_stop)
+        print "page_start "  + str(page)
+        while page < page_stop:
+            url = 'https://www.kuaidaili.com/free/inha/%d/' % page
+            user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"
+            referer = 'https://www.kuaidaili.com/free/inha/1/'
+            headers = {"User-Agent": user_agent, 'Referer': referer}
+            request = urllib2.Request(url, headers=headers)
+            html = urllib2.urlopen(request)
+            print "fetch " + url
+            #print html
+            soup = BeautifulSoup(html, 'lxml')
+            ip_list = soup.find(id='list')
+            if ip_list == None:
+                print u"fail to fetch proxy"
+                return 
+            if type(ip_list) == "NoneType" :
+                print u"fail to fetch proxy"
+                return
+            for odd in ip_list.find_all('tr'):
+                if  odd.find_all('td'):
+                    protocol = odd.find_all('td')[3].get_text().lower() + '://'
+                    self.proxies.append(protocol + ':'.join([x.get_text() for x in odd.find_all('td')[0:2]]))
+            import time 
+            time.sleep(5)
+            page += 1
+
+    def  get_proxies_mrhinkydink(self):
+        print "get_proxies"
+        page = 1
+        page_stop = page + self.page_count
+        print "page_stop" + str(page_stop)
+        print "page_start "  + str(page)
+        while page < page_stop:
+            if page == 1:
+                url = 'http://www.mrhinkydink.com/proxies.htm'
+            else:
+                url = 'http://www.mrhinkydink.com/proxies%s.htm' % page
+            
+            user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"
+            referer = 'http://www.mrhinkydink.com/'
+            headers = {"User-Agent": user_agent, 'Referer': referer}
+            request = urllib2.Request(url, headers=headers)
+            html = urllib2.urlopen(request)
+            print "fetch " + url
+            #print html
+            soup = BeautifulSoup(html, 'lxml')
+            ip_list = soup.find_all("tr", {"class": "text"})
+            if ip_list == None:
+                print u"fail to fetch proxy"
+                return 
+            if type(ip_list) == "NoneType" :
+                print u"fail to fetch proxy"
+                return
+            #print ip_list
+            for tr in ip_list:
+                if tr:
+                    #print tr
+                    if  tr.find_all('td'):
+                        self.proxies.append(("http://" + ':'.join([x.get_text() for x in tr.find_all('td')[0:2]])).replace("*",""))
+                        self.proxies.append(("https://" + ':'.join([x.get_text() for x in tr.find_all('td')[0:2]])).replace("*",""))
+            import time 
+            time.sleep(2)
+            page += 1
+    
     def get_proxies(self):
+        print "get_proxies"
         page = random.randint(1, 10)
         page_stop = page + self.page_count
+        print "page_stop" + str(page_stop)
+        print "page_start "  + str(page)
         while page < page_stop:
+           
             url = 'http://www.xicidaili.com/nt/%d' % page
             user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
             referer = 'http://www.zhihu.com/articles'
