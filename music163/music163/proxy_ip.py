@@ -89,8 +89,8 @@ class Proxies(object):
                 if tr:
                     #print tr
                     if  tr.find_all('td'):
-                        self.proxies.append(("http://" + ':'.join([x.get_text() for x in tr.find_all('td')[0:2]])).replace("*",""))
-                        self.proxies.append(("https://" + ':'.join([x.get_text() for x in tr.find_all('td')[0:2]])).replace("*",""))
+                        self.proxies.append(("http://" + ':'.join([x.get_text() for x in tr.find_all('td')[0:2]])).replace("*","").replace("\u2020",""))
+                        self.proxies.append(("https://" + ':'.join([x.get_text() for x in tr.find_all('td')[0:2]])).replace("*","").replace("\u2020",""))
             import time 
             time.sleep(2)
             page += 1
@@ -175,6 +175,9 @@ class Proxies(object):
             if proxy == 0: break
             protocol = 'https' if 'https' in proxy else 'http'
             proxies = {protocol: proxy}
+            if "copy" in proxy:
+                print('fail %s' % proxy)
+                return
             try:
                     response =requests.get('http://music.163.com/#/discover/artist', proxies=proxies, timeout=1) 
                     if response.status_code== 200 and response.content.index("GWebpSupport")> -1:
