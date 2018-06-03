@@ -176,7 +176,7 @@ class Proxies(object):
             protocol = 'https' if 'https' in proxy else 'http'
             proxies = {protocol: proxy}
             try:
-                    response =requests.get('http://music.163.com/#/discover/artist', proxies=proxies, timeout=2) 
+                    response =requests.get('http://music.163.com/#/discover/artist', proxies=proxies, timeout=1) 
                     if response.status_code== 200 and response.content.index("GWebpSupport")> -1:
                         print('success %s' % proxy)
                         new_queue.put(proxy)
