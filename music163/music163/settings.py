@@ -73,6 +73,12 @@ DEFAULT_REQUEST_HEADERS = {
 #    'music163.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
 
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': None,
+    'music163.middlewares.RotateUserAgentMiddleware': 1,
+    'music163.middlewares.ProxyMiddleware': 300
+}
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
