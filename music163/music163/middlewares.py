@@ -149,8 +149,10 @@ class ProxyMiddleware(object):
 
     def process_exception(self, request, exception, spider):
         if "music.163.com" in request.url:
-
-            logging.error("爬取网易云音乐异常，url=" + str(request.url) + "，异常：" + str(exception) + ":"　+ request.meta['proxy']) 
+            if not request.meta.has_key("proxy"):
+                print "proxy is empty"
+                print request.meta
+            logging.error("爬取网易云音乐异常，url=" + str(request.url) + "，异常：" + str(exception) + ":") 
             # 从日志看异常也是IP被封，因此换IP重新处理
             request.meta['change_proxy'] = True
             request.dont_filter = True
