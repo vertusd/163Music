@@ -140,7 +140,7 @@ class ProxyMiddleware(object):
                 pass
 
         return response
-    def get_new_proxies():
+    def get_new_proxies(self):
         print "get_new proxies"
         a = Proxies()
         a.verify_proxies()
