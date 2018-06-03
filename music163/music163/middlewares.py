@@ -151,5 +151,7 @@ class ProxyMiddleware(object):
             # 从日志看异常也是IP被封，因此换IP重新处理
             request.meta['change_proxy'] = True
             request.dont_filter = True
+            import time
+            time.sleep(10)
             return request
 
