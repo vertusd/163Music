@@ -174,7 +174,9 @@ class Proxies(object):
             proxy = old_queue.get()
             if proxy == 0: break
             protocol = 'https' if 'https' in proxy else 'http'
-            proxy = proxy.replace("\u2020","")
+            if u"\u0202" in proxy or r"\u2020" in proxy:
+                print('fail %s' % proxy)
+                return
             proxies = {protocol: proxy}
             if "copy" in proxy:
                 print('fail %s' % proxy)
