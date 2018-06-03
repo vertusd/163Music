@@ -18,7 +18,7 @@ class Proxies(object):
         self.proxies = []
         self.verify_pro = []
         self.page_count = page
-        self.get_proxies_mrhinkydink()
+        self.get_proxies_mogu()
 
 
         #self.get_proxies()
@@ -56,6 +56,44 @@ class Proxies(object):
             import time 
             time.sleep(5)
             page += 1
+
+    def  get_proxies_mogu(self):
+        print "get_proxies"
+        page = 1
+        page_stop = page + self.page_count
+        print "page_stop" + str(page_stop)
+        print "page_start "  + str(page)
+        while page < 2:
+            url = 'http://www.mogumiao.com/proxy/free/listFreeIp'
+
+            
+            user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"
+            referer = 'http://www.mrhinkydink.com/'
+            headers = {"User-Agent": user_agent, 'Referer': referer}
+            request = urllib2.Request(url, headers=headers)
+            html = urllib2.urlopen(request).read()
+            print "fetch " + url
+            #print html
+            json_reuslt = json.loads(html)
+            ip_list = json_reuslt["msg"]
+            if ip_list == None:
+                print u"fail to fetch proxy"
+                return 
+            if type(ip_list) == "NoneType" :
+                print u"fail to fetch proxy"
+                return
+            print ip_list
+            for tr in ip_list:
+                if tr:
+                    #print tr
+                    if  tr.has_key("ip") and tr.has_key("port"):
+                        #self.proxies.append(("http://" + ':'.join([x.get_text() for x in tr.find_all('td')[0:2]])).replace("*","").replace("\u2020",""))
+                        self.proxies.append(("https://" + tr["ip"] + ":" + tr["port"]))
+            print self.proxies
+            import time 
+            time.sleep(2)
+            page += 1
+
 
     def  get_proxies_mrhinkydink(self):
         print "get_proxies"
@@ -174,7 +212,7 @@ class Proxies(object):
             proxy = old_queue.get()
             if proxy == 0: break
             protocol = 'https' if 'https' in proxy else 'http'
-            if u"\u0202" in proxy or r"\u2020" in proxy or u"†" in proxy:
+            if u"\\u0202" in proxy or r"\u2020" in proxy or u"†" in proxy:
                 print('fail %s' % proxy)
                 return
             proxies = {protocol: proxy}
