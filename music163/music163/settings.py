@@ -21,7 +21,7 @@ SPIDER_MODULES = ['music163.spiders']
 NEWSPIDER_MODULE = 'music163.spiders'
 
 JOBDIR='pause'
-CONCURRENT_REQUESTS = 2
+#CONCURRENT_REQUESTS = 2
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'music163 (+http://www.yourdomain.com)'
 
