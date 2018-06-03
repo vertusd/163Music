@@ -104,6 +104,7 @@ def get_new_proxies():
     a.init_proxy()
     a.verify_proxies()
     print(a.proxies)
+    global http_proxies
     http_proxies = a.proxies
 
 
