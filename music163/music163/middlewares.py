@@ -98,14 +98,8 @@ class RotateUserAgentMiddleware(object):
 
 
 http_proxies = []
-a = Proxies()
-def get_new_proxies():
-    print "get_new proxies"
-    a.init_proxy()
-    a.verify_proxies()
-    print(a.proxies)
-    global http_proxies
-    http_proxies = a.proxies
+
+
 
 
 
@@ -125,7 +119,7 @@ class ProxyMiddleware(object):
             # 没有可用代理，需要重新从西刺代理获取
             while len(http_proxies) == 0:
                 logging.info("没有可用代理，开始重新获取...")
-                get_new_proxies()
+                self.get_new_proxies()
                 logging.info("本次获取到有效代理IP：" + str(http_proxies))
 
             proxy = random.choice(http_proxies)
@@ -146,7 +140,13 @@ class ProxyMiddleware(object):
                 pass
 
         return response
-
+    def get_new_proxies(self):
+        print "get_new proxies"
+        a = Proxies()
+        a.verify_proxies()
+        print(a.proxies)
+        global http_proxies
+        http_proxies = a.proxies
 
     def process_exception(self, request, exception, spider):
         if "music.163.com" in request.url:
